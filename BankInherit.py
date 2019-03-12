@@ -10,6 +10,20 @@ class BankAccount:
         self.balance +=amount
         return self.balance
 
-personal = BankAccount()
+#Inheritance in action
+class MinimumBalanceAccount(BankAccount):
+    def __init__(self, minimum_balance):
+        BankAccount.__init__(self)
+        self.minimum_balance = minimum_balance
+
+    def withdraw(self, amount):
+        if self.balance -amount < self.minimum_balance:
+            print('Sorry, minimum balance must be maintained')
+        else:
+            BankAccount.withdraw(self,amount)
+
+
+personal = MinimumBalanceAccount(500)
 personal.balance= 1000
 print(personal.deposit(200))
+print(personal.withdraw(1400))
